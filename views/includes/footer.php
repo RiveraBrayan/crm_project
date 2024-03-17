@@ -26,18 +26,25 @@
 <script src="<?php echo $base_path; ?>/assets/customs/dataTables/dataTables.js?v=<?php echo rand() ?>"></script>
 <script src="<?php echo $base_path; ?>/assets/customs/sweetAlerts/sweetAlerts.js?v=<?php echo rand() ?>"></script>
 <script src="<?php echo $base_path; ?>/assets/js/dataTables.min.js"></script>
+<script src="<?php echo $base_path; ?>/assets/js/parsley.min.js"></script>
 <script src="<?php echo $base_path; ?>/assets/js/core/popper.min.js"></script>
 <script src="<?php echo $base_path; ?>/assets/js/core/bootstrap.min.js"></script>
 <script src="<?php echo $base_path; ?>/assets/js/plugins/perfect-scrollbar.min.js"></script>
 <script src="<?php echo $base_path; ?>/assets/js/plugins/smooth-scrollbar.min.js"></script>
 <script src="<?php echo $base_path; ?>/assets/customs/template/template.js?v=<?php echo rand() ?>"></script>
 
+
 <?php
 if (isset($_GET['page'])) {
   echo '<script src="views/assets/customs/' . $_GET['page'] . '/' . $_GET['page'] . '.js?v=' . rand() . '"></script>';
 }
 ?>
+
 <script>
+$(document).ready(function() {
+    $('#form').parsley(); // Initialize Parsley on the form
+});  
+
   var win = navigator.platform.indexOf('Win') > -1;
   if (win && document.querySelector('#sidenav-scrollbar')) {
     var options = {

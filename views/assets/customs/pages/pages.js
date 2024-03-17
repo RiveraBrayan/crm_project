@@ -85,7 +85,7 @@ pages = function () {
           message = response.message;
 
           if (status == 202) {
-            fncSweetAlert('success', message, 'reload');
+            fncSweetAlert('success', message, 'pages');
           } else {
             fncSweetAlert('error', message, 'text');
           }
@@ -211,16 +211,19 @@ $('.searchInfo').on('click', function () {
   pages.tablePages();
 });
 
-$('.saveSubmit').on('click', function () {
-  pages.saveInfo();
-});
+// $('.saveSubmit').on('click', function () {
+//   pages.saveInfo();
+// });
 
 if ($("#tableRoles").length > 0) {
   pages.tableRoles();
 }
 
 $('.saveRol').on('click', function () {
-  pages.saveRolesinfo();
+  $('#form_rol').parsley().on('form:submit', function () {
+    event.preventDefault();
+    pages.saveRolesinfo();
+  });
 });
 
 if ($("#txtRoles").length > 0) {
@@ -231,4 +234,9 @@ if ($("#txtRoles").length > 0) {
 if ($("#txtId").length > 0) {
   pages.infoPages();
   pages.showInputs();
+  
+  $('#form').parsley().on('form:submit', function () {
+    event.preventDefault();
+    pages.saveInfo();
+  });
 }

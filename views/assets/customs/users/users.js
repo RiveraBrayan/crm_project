@@ -12,9 +12,9 @@ users = function () {
       let txtUsernameFilter = $('#txtUsernameFilter').val();
       let txtEmailFilter = $('#txtEmailFilter').val();
       let txtStatusUser = $('#txtStatusUser').val();
-      
+
       var url = `controllers/usersController.php?action=${action}&txtNameFilter=${txtNameFilter}&txtUsernameFilter=${txtUsernameFilter}&txtEmailFilter=${txtEmailFilter}&txtStatusUser=${txtStatusUser}`;
-      
+
       var columns = [
         { data: 'counter' },
         { data: 'name_user' },
@@ -24,14 +24,14 @@ users = function () {
         { data: 'position_user' },
         { data: 'actions' },
       ];
-      
+
       table = `tableUsers`;
-      
+
       execDatatable(table, url, columns);
-      
+
     },
 
-    infoUsers: function(){
+    infoUsers: function () {
 
       var data = new FormData();
       data.append("action", 'infoUsers');
@@ -45,7 +45,7 @@ users = function () {
         data: data,
         dataType: 'json',
         success: function (data) {
-          if(data.status == 202){
+          if (data.status == 202) {
             let dataUsers = data.JsonData;
 
             $('#txtUsername').val(dataUsers.username_user);
@@ -55,12 +55,12 @@ users = function () {
             $('#txtDeparment').val(dataUsers.deparment_user);
             $('#txtPosition').val(dataUsers.position_user);
 
-            if(dataUsers.active_user == 1){
+            if (dataUsers.active_user == 1) {
               var miCheckbox = document.getElementById('checkboxActive');
               miCheckbox.checked = true;
             }
 
-            if(dataUsers.su_user == 1){
+            if (dataUsers.su_user == 1) {
               var miCheckboxSu = document.getElementById('checkboxSuperSu');
               miCheckboxSu.checked = true;
             }
@@ -72,41 +72,41 @@ users = function () {
       });
     },
 
-    saveUsersInfo: function(){
+    saveUsersInfo: function () {
 
-      let action = 'saveUsersInfo';
-      let txtId = $('#txtId').val();
-      let txtUsername = $('#txtUsername').val();
-      let txtPassword = $('#txtPassword').val();
-      let txtFullname = $('#txtFullname').val();
-      let txtEmail = $('#txtEmail').val();
-      let txtPhone = $('#txtPhone').val();
-      let txtDeparment = $('#txtDeparment').val();
-      let txtPosition = $('#txtPosition').val();
-      let checkboxSuperSu = document.getElementById('checkboxSuperSu').checked ? 1 : 0;
-      let checkboxActive = document.getElementById('checkboxActive').checked ? 1 : 0;
+        let action = 'saveUsersInfo';
+        let txtId = $('#txtId').val();
+        let txtUsername = $('#txtUsername').val();
+        let txtPassword = $('#txtPassword').val();
+        let txtFullname = $('#txtFullname').val();
+        let txtEmail = $('#txtEmail').val();
+        let txtPhone = $('#txtPhone').val();
+        let txtDeparment = $('#txtDeparment').val();
+        let txtPosition = $('#txtPosition').val();
+        let checkboxSuperSu = document.getElementById('checkboxSuperSu').checked ? 1 : 0;
+        let checkboxActive = document.getElementById('checkboxActive').checked ? 1 : 0;
 
-      var data = new FormData();
-      data.append("action", action);
-      data.append("txtId", txtId);
-      data.append("txtUsername", txtUsername);
-      data.append("txtPassword", txtPassword);
-      data.append("txtFullname", txtFullname);
-      data.append("txtEmail", txtEmail);
-      data.append("txtPhone", txtPhone);
-      data.append("txtDeparment", txtDeparment);
-      data.append("txtPosition", txtPosition);
-      data.append("checkboxSuperSu", checkboxSuperSu);
-      data.append("checkboxActive", checkboxActive);
+        var data = new FormData();
+        data.append("action", action);
+        data.append("txtId", txtId);
+        data.append("txtUsername", txtUsername);
+        data.append("txtPassword", txtPassword);
+        data.append("txtFullname", txtFullname);
+        data.append("txtEmail", txtEmail);
+        data.append("txtPhone", txtPhone);
+        data.append("txtDeparment", txtDeparment);
+        data.append("txtPosition", txtPosition);
+        data.append("checkboxSuperSu", checkboxSuperSu);
+        data.append("checkboxActive", checkboxActive);
 
-      $.ajax({
-        url: 'controllers/usersController.php',
-        method: 'POST',
-        processData: false,
-        contentType: false,
-        data: data,
-        dataType: 'json',
-        success: function (response) {
+        $.ajax({
+          url: 'controllers/usersController.php',
+          method: 'POST',
+          processData: false,
+          contentType: false,
+          data: data,
+          dataType: 'json',
+          success: function (response) {
             status = response.status;
             message = response.message;
 
@@ -115,11 +115,12 @@ users = function () {
             } else {
               fncSweetAlert('error', message, 'text');
             }
-        },
-        error: function (error) {
-          console.error('Errors');
-        }
-      });
+          },
+          error: function (error) {
+            console.error('Errors');
+          }
+        });
+      
     },
 
     /**********************************************
@@ -129,17 +130,17 @@ users = function () {
 
       let action = 'tableRoles';
       let id_user = $('#id_user').val();
-      
+
       var url = `controllers/usersController.php?action=${action}&id_user=${id_user}`;
-      
+
       var columns = [
         { data: 'counter' },
         { data: 'name_rol' },
         { data: 'actions' },
       ];
-      
+
       table = `tableRoles`;
-      
+
       execDatatable(table, url, columns);
 
     },
@@ -163,11 +164,11 @@ users = function () {
         success: function (response) {
           let status = response.status;
           let JsonData = response.JsonData;
-          
-          if(status == 202){
+
+          if (status == 202) {
             var selectElement = document.getElementById("txtRoles");
             selectElement.innerHTML = JsonData;
-          }else{
+          } else {
             var selectElement = document.getElementById("txtRoles");
             selectElement.innerHTML = JsonData;
           }
@@ -175,17 +176,17 @@ users = function () {
       });
     },
 
-    saveRolesinfo: function(){
-      
+    saveRolesinfo: function () {
+
       let id_rol = $('#txtRoles').val();
       let id_user = $('#id_user').val();
 
-      if(id_rol != ''){
+      if (id_rol != '') {
         var data = new FormData();
         data.append("action", 'saveRolesinfo');
         data.append("id_user", id_user);
         data.append("id_rol", id_rol);
-  
+
         $.ajax({
           url: 'controllers/usersController.php',
           method: 'POST',
@@ -194,14 +195,14 @@ users = function () {
           data: data,
           dataType: 'json',
           success: function (response) {
-            status  = response.status;
+            status = response.status;
             message = response.message;
 
-           if(status == 202){
-            fncSweetAlert('success', message, 'reload');
-           }else{
-            fncSweetAlert('error', message, 'text');
-           }
+            if (status == 202) {
+              fncSweetAlert('success', message, 'reload');
+            } else {
+              fncSweetAlert('error', message, 'text');
+            }
           }
         });
       }
@@ -210,12 +211,12 @@ users = function () {
     /**********************************************
     * Extra Functions
     **********************************************/
-    showInputs: function(){
-      if($('#txtId').val() == ''){
+    showInputs: function () {
+      if ($('#txtId').val() == '') {
         document.getElementById('inputPassword').style = 'display:block'
       }
 
-      if($('#txtId').val() != ''){
+      if ($('#txtId').val() != '') {
         document.getElementById('inputCheckbox').style = 'display:block'
       }
     },
@@ -231,31 +232,37 @@ $(document).ready(function () {
   users.init();
 });
 
-if($("#tableUsers").length > 0){
+if ($("#tableUsers").length > 0) {
   users.tableUsers();
 }
 
-$('.searchInfo').on( 'click', function (){
+$('.searchInfo').on('click', function () {
   users.tableUsers();
 });
 
-if($("#tableRoles").length > 0){
+if ($("#tableRoles").length > 0) {
   users.tableRoles();
 }
 
-$('.saveRol').on( 'click', function (){
-  users.saveRolesinfo();
+$('.saveRol').on('click', function () {
+  $('#form_rol').parsley().on('form:submit', function () {
+    event.preventDefault();
+    users.saveRolesinfo();
+  });
 });
 
-if($("#txtRoles").length > 0){
+if ($("#txtRoles").length > 0) {
   users.generateSelectRoles();
 }
 
-$('.userSubmit').on( 'click', function (){
-  users.saveUsersInfo();
-});
 
-if($("#txtId").length > 0){
+if ($("#txtId").length > 0) {
   users.infoUsers();
   users.showInputs();
+
+  $('#form').parsley().on('form:submit', function () {
+    event.preventDefault();
+    users.saveUsersInfo();
+  });
 }
+

@@ -124,8 +124,10 @@ $('.searchInfo').on( 'click', function (){
 if($("#txtId").length > 0){
   roles.infoRoles();
   roles.showInputs();
+
+  $('#form').parsley().on('form:submit', function () {
+    event.preventDefault();
+    roles.saveInfo();
+  });
 }
 
-$('.saveSubmit').on( 'click', function (){
-  roles.saveInfo();
-});

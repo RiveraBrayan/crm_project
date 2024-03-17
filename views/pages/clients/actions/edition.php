@@ -14,14 +14,14 @@
 
 <div class="row">
     <h4><?php echo $tittle ?> </h4>
-    <form method="post"  class="needs-validation" novalidate autocomplete="off" enctype="multipart/form-data">
+    <form method="post" id="form" class="needs-validation" novalidate autocomplete="off" enctype="multipart/form-data">
         <div class="row">
             <input type="hidden" id="txtId" value="<?php echo $id ?>">
 
             <div class="col-md-6">
             <div class="input-group input-group-static mb-4">
                 <label>First Name</label>
-                <input type="text" class="form-control required" id="firstName_client">
+                <input type="text" class="form-control required" id="firstName_client" data-parsley-required="true">
                 <div class="invalid-feedback">Campo vacío, rellenar</div>
             </div>
         </div>
@@ -29,35 +29,35 @@
             <div class="col-md-6">
                 <div class="input-group input-group-static mb-4">
                     <label>Second Name</label>
-                    <input type="text" class="form-control required" id="secondName_client" >
+                    <input type="text" class="form-control required" id="secondName_client" data-parsley-required="true">
                 </div>
             </div>
 
             <div class="col-md-6">
                 <div class="input-group input-group-static mb-4">
                     <label>Phone</label>
-                    <input type="text" class="form-control required" id="phone_client" pattern="^[0-9]+$">
+                    <input type="text" class="form-control required" id="phone_client" pattern="^[0-9]+$" data-parsley-required="true">
                 </div>
             </div>
 
             <div class="col-md-6">
                 <div class="input-group input-group-static mb-4">
                     <label>Mail</label>
-                    <input type="mail" class="form-control required" id="mail_client" >
+                    <input type="mail" class="form-control required" id="mail_client" data-parsley-required="true">
                 </div>
             </div>
 
             <div class="col-md-6">
                 <div class="input-group input-group-static mb-4">
                     <label>Address</label>
-                    <input type="text" class="form-control required" id="address_client" >
+                    <input type="text" class="form-control required" id="address_client" data-parsley-required="true">
                 </div>
             </div>
 
             <div class="col-md-6">
                 <div class="input-group input-group-static mb-4">
                     <label>Organization</label>
-                    <input type="text" class="form-control required" id="organization_client" >
+                    <input type="text" class="form-control required" id="organization_client" data-parsley-required="true">
                 </div>
             </div>
 
@@ -69,7 +69,7 @@
             </div>
 
             <div class="d-flex justify-content-end">
-                <button type="button" class="btn btn-info saveSubmit">Save</button>
+                <button type="submit" class="btn btn-info saveSubmit">Save</button>
                 <a type="button" href="clients" class="btn btn-danger ml-2" style="color: white;">Cancel</a>
             </div>
         </div>

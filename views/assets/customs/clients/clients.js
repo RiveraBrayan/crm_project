@@ -134,15 +134,16 @@ clients = function () {
   $('.searchInfo').on('click', function () {
     clients.tableClients();
   });
-  
-  $('.saveSubmit').on('click', function () {
-    clients.saveInfo();
-  });
 
   if ($("#txtId").length > 0) {
     if($('#txtId').val() != ''){
         clients.showInputs();
         clients.infoClient();
+
+        $('#form').parsley().on('form:submit', function () {
+          event.preventDefault();
+          clients.saveInfo();
+        });
     }
   } 
 

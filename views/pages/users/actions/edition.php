@@ -14,56 +14,56 @@
 
 <div class="row">
     <h4><?php echo $tittle ?> </h4>
-    <form method="post"  class="needs-validation" novalidate autocomplete="off" enctype="multipart/form-data">
+    <form method="post" id="form" class="needs-validation" novalidate autocomplete="off" enctype="multipart/form-data">
         <div class="row">
             <input type="hidden" id="txtId" value="<?php echo $id_user ?>">
 
             <div class="col-md-6">
                 <div class="input-group input-group-static mb-4">
                     <label>Username</label>
-                    <input type="text" class="form-control" id="txtUsername" value="">
+                    <input type="text" class="form-control" id="txtUsername" value="" data-parsley-required="true">
                 </div>
             </div>
 
             <div class="col-md-6" id="inputPassword" style="display:none">
                 <div class="input-group input-group-static mb-4">
                     <label>Password</label>
-                    <input type="text" class="form-control" id="txtPassword">
+                    <input type="text" class="form-control" id="txtPassword" <?php echo  $id_user == '' ? 'data-parsley-required="true"' : '' ?>>
                 </div>
             </div>
 
             <div class="col-md-6">
                 <div class="input-group input-group-static mb-4">
                     <label>Full Name</label>
-                    <input type="text" class="form-control" id="txtFullname" value="">
+                    <input type="text" class="form-control" id="txtFullname" value="" data-parsley-required="true">
                 </div>
             </div>
 
             <div class="col-md-6">
-                <div class="input-group input-group-static mb-4">
+                <div class="input-group input-group-static mb-4"> 
                     <label>Email</label>
-                    <input type="text" class="form-control" id="txtEmail" value="">
+                    <input type="text" class="form-control" id="txtEmail" value="" data-parsley-required="true">
                 </div>
             </div>
 
             <div class="col-md-6">
                 <div class="input-group input-group-static mb-4">
                     <label>Phone</label>
-                    <input type="text" class="form-control" id="txtPhone" value="">
+                    <input type="text" class="form-control" id="txtPhone" value="" data-parsley-required="true">
                 </div>
             </div>
 
             <div class="col-md-6">
                 <div class="input-group input-group-static mb-4">
                     <label>Deparment</label>
-                    <input type="text" class="form-control" id="txtDeparment" value="">
+                    <input type="text" class="form-control" id="txtDeparment" value="" data-parsley-required="true">
                 </div>
             </div>
 
             <div class="col-md-6">
                 <div class="input-group input-group-static mb-4">
                     <label>Position</label>
-                    <input type="text" class="form-control" id="txtPosition" value="">
+                    <input type="text" class="form-control" id="txtPosition" value="" data-parsley-required="true">
                 </div>
             </div>
 
@@ -82,7 +82,7 @@
             </div>
 
             <div class="d-flex justify-content-end">
-                <button type="button" class="btn btn-info userSubmit">Save</button>
+                <button type="submit" class="btn btn-info userSubmit">Save</button>
                 <a type="button" href="users" class="btn btn-danger ml-2" style="color: white;">Cancel</a>
             </div>
 
