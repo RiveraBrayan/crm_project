@@ -51,7 +51,7 @@ if (!empty($page)) {
                 $objeto = new $controller();
                 $objeto->$view();
             }else{
-                    // header('Location: 404');
+                header('Location: forbidden');
             }
         
 } else {

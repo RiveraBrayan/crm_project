@@ -8,7 +8,7 @@
     <div class="col-md-10"></div>
     <div class="col-md-2" >
         <div class="input-group input-group-outline my-3">
-            <a class="btn btn-icon btn-2 btn-success" type="button" style="color :white" href="clients?edition=">
+            <a class="btn btn-icon btn-2 btn-success" type="button" style="color :white; margin-left: 40%;" href="clients?edition=">
                 <span class="btn-inner--icon"><i class="fas fa-plus-square"></i> Add client</span>
             </a>
         </div>

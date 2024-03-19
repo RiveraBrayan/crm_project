@@ -37,174 +37,113 @@ $userInfo = $InfoUser->userInfo($_SESSION['userData']['id_user']);
   <!-- CSS Files -->
   <link id="pagestyle" href="<?php echo $base_path; ?>/assets/css/material-dashboard.css?v=3.0.0" rel="stylesheet" />
   <style>
-    /* Estilo para hacer la imagen redonda y pequeña */
     .user-icon {
       border-radius: 50%;
-      width: 30px; /* Ajusta el tamaño según tus necesidades */
-      height: 30px; /* Ajusta el tamaño según tus necesidades */
-      object-fit: cover; /* Ajusta la forma de ajustar la imagen dentro del contenedor */
+      width: 30px;
+      height: 30px;
+      object-fit: cover;
     }
 
-    hr{
+    hr {
       background-color: gray !important;
     }
   </style>
 </head>
 
 <body class="g-sidenav-show  bg-gray-200">
-  <?php if($_GET['page'] != 'sign-up' AND $_GET['page'] != 'login'): ?>
-  <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-gradient-dark" id="sidenav-main">
-    <div class="sidenav-header">
-      <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
-      <a class="navbar-brand m-0" href="home">
-        <img src="<?php echo $base_path; ?>/assets/img/small-logos/icon-sun-cloud.png" class="navbar-brand-img h-100" alt="main_logo">
-        <span class="ms-1 font-weight-bold text-white">Gestor CRM</span>
-      </a>
-    </div>
-    <hr class="horizontal light mt-0 mb-2">
-    <div class="collapse navbar-collapse  w-auto  max-height-vh-100" id="sidenav-collapse-main">
-      <ul class="navbar-nav">
-        <?php
-          if(isset($_SESSION['userData']['su_user'])){
-            $usersArray = array(
-              'id_page'=> '',
-              'name_page'=> 'Users', 
-              'urlpage_page'=> 'users',
-              'clase_page'=> 'fas fa-users',
-              'id_parent_page'=> '',
-              'catalogue_page'=> '',
-            );
-    
-            $rolesArray = array(
-              'id_page'=> '',
-              'name_page'=> 'Roles',
-              'urlpage_page'=> 'roles',
-              'clase_page'=> 'fas fa-user-tag',
-              'id_parent_page'=> '',
-              'catalogue_page'=> '',
-            );
-    
-            $pagesArray = array(
-              'id_page'=> '',
-              'name_page'=> 'Pages',
-              'urlpage_page'=> 'pages',
-              'clase_page'=> 'fas fa-bars',
-              'id_parent_page'=> '',
-              'catalogue_page'=> '',
-            );
-    
-            $arrayNavbar[] = $usersArray;
-            $arrayNavbar[] = $rolesArray;
-            $arrayNavbar[] = $pagesArray;
-          }
-          foreach ($arrayNavbar as $pagina) {
-            $id_page = $pagina['id_page'];
-            $name_page = $pagina['name_page'];
-            $urlpage_page = $pagina['urlpage_page'];
-            $clase_page = $pagina['clase_page'];
-            $id_parent_page = $pagina['id_parent_page'];
-            $catalogue_page = $pagina['catalogue_page'];
-
-            if ($_GET['page'] == $urlpage_page) {
-              $active = 'active';
-            } else {
-              $active = '';
-            }
-
-            if($name_page == 'Users'){
-              echo '<li class="nav-item mt-3">
-                    <h6 class="ps-4 ms-2 text-uppercase text-xs text-white font-weight-bolder opacity-8">Settings</h6>
-                  </li>';
-            }
-
-            echo '<li class="nav-item">';
-              echo '<a class="nav-link text-white ' . $active . '" href="' . $urlpage_page . '">';
-                echo '<div class="text-white text-center me-2 d-flex align-items-center justify-content-center">';
-                  echo '<i class="' . $clase_page . '"></i>';
-                echo '</div>';
-                echo '<span class="nav-link-text ms-1">' . $name_page . '</span>';
-              echo '</a>';
-            echo '</li>';
-          }
-        ?>
-      </ul>
-    </div>
-  </aside>
+  <?php if ($_GET['page'] != 'sign-up' and $_GET['page'] != 'login') : ?>
+    <aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3   bg-gradient-dark" id="sidenav-main">
+      <div class="sidenav-header">
+        <i class="fas fa-times p-3 cursor-pointer text-white opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
+        <a class="navbar-brand m-0" href="home">
+          <img src="<?php echo $base_path; ?>/assets/img/small-logos/icon-sun-cloud.png" class="navbar-brand-img h-100" alt="main_logo">
+          <span class="ms-1 font-weight-bold text-white">Gestor CRM</span>
+        </a>
+      </div>
+      <hr class="horizontal light mt-0 mb-2">
+      <div class="collapse navbar-collapse  w-auto  max-height-vh-100" id="sidenav-collapse-main">
+        <ul class="navbar-nav">
+          <?php
+            echo $arrayNavbar;
+          ?>
+        </ul>
+      </div>
+    </aside>
   <?php endif ?>
   <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg ">
-  <?php if($_GET['page'] != 'sign-up' AND $_GET['page'] != 'login'): ?>
-    <!-- Navbar -->
-    <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" data-scroll="true">
-      <div class="container-fluid py-1 px-3">
-        <nav aria-label="breadcrumb">
+    <?php if ($_GET['page'] != 'sign-up' and $_GET['page'] != 'login') : ?>
+      <!-- Navbar -->
+      <nav class="navbar navbar-main navbar-expand-lg px-0 mx-4 shadow-none border-radius-xl" id="navbarBlur" data-scroll="true">
+        <div class="container-fluid py-1 px-3">
+          <nav aria-label="breadcrumb">
 
-          <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
-            <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>
-            <li class="breadcrumb-item text-sm text-dark active" aria-current="page"><?php echo ucfirst($_GET['page']) ?></li>
-          </ol>
-          <h6 class="font-weight-bolder mb-0"><?php echo ucfirst($_GET['page']) ?></h6>
+            <ol class="breadcrumb bg-transparent mb-0 pb-0 pt-1 px-0 me-sm-6 me-5">
+              <li class="breadcrumb-item text-sm"><a class="opacity-5 text-dark" href="javascript:;">Pages</a></li>
+              <li class="breadcrumb-item text-sm text-dark active" aria-current="page"><?php echo ucfirst($_GET['page']) ?></li>
+            </ol>
+            <h6 class="font-weight-bolder mb-0"><?php echo ucfirst($_GET['page']) ?></h6>
 
-        </nav>
-        <!-- Alert -->
-        <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
-          <div class="ms-md-auto pe-md-3 d-flex align-items-center">
+          </nav>
+          <!-- Alert -->
+          <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4" id="navbar">
+            <div class="ms-md-auto pe-md-3 d-flex align-items-center">
 
-            <!-- <div class="input-group input-group-outline">
+              <!-- <div class="input-group input-group-outline">
             </div> -->
 
-          </div>
-          <ul class="navbar-nav  justify-content-end">
-            <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
-              <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
-                <div class="sidenav-toggler-inner">
-                  <i class="sidenav-toggler-line"></i>
-                  <i class="sidenav-toggler-line"></i>
-                  <i class="sidenav-toggler-line"></i>
-                </div>
-              </a>
-            </li>
-            <li class="nav-item dropdown pe-2 d-flex align-items-center">
-              <a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src="<?php echo $userInfo['photo_user']  != '' ? './views/archives/profile_picture/'.$_SESSION['userData']['id_user'].'/'.$userInfo['photo_user'] : './views/assets/img/userIcon.jpeg'?>" alt="" class="user-icon">
-              </a>
-              <ul class="dropdown-menu  dropdown-menu-end  px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton" style="border: 1px solid #ccc; background-color: #f8f9fa;">
-                <li class="mb-2">
-                  <a class="dropdown-item border-radius-md" style="pointer-events: none !important; cursor: default;">
-                    <div class="d-flex py-1">
-                      <div class="d-flex flex-column justify-content-center">
-                        <h4 class="text-sm font-weight-normal mb-1">
-                          <span class="font-weight-bold"><?php echo $userInfo['name_user'] ?></span>
-                        </h4>
+            </div>
+            <ul class="navbar-nav  justify-content-end">
+              <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
+                <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
+                  <div class="sidenav-toggler-inner">
+                    <i class="sidenav-toggler-line"></i>
+                    <i class="sidenav-toggler-line"></i>
+                    <i class="sidenav-toggler-line"></i>
+                  </div>
+                </a>
+              </li>
+              <li class="nav-item dropdown pe-2 d-flex align-items-center">
+                <a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                  <img src="<?php echo $userInfo['photo_user']  != '' ? './views/archives/profile_picture/' . $_SESSION['userData']['id_user'] . '/' . $userInfo['photo_user'] : './views/assets/img/userIcon.jpeg' ?>" alt="" class="user-icon">
+                </a>
+                <ul class="dropdown-menu  dropdown-menu-end  px-2 py-3 me-sm-n4" aria-labelledby="dropdownMenuButton" style="border: 1px solid #ccc; background-color: #f8f9fa;">
+                  <li class="mb-2">
+                    <a class="dropdown-item border-radius-md" style="pointer-events: none !important; cursor: default;">
+                      <div class="d-flex py-1">
+                        <div class="d-flex flex-column justify-content-center">
+                          <h4 class="text-sm font-weight-normal mb-1">
+                            <span class="font-weight-bold"><?php echo $userInfo['name_user'] ?></span>
+                          </h4>
+                        </div>
                       </div>
-                    </div>
-                  </a>
-                </li>
-                <hr>
-                <li class="mb-2">
-                  <a class="dropdown-item border-radius-md" href="profile">
-                    <div class="d-flex py-1">
-                      <div class="d-flex flex-column justify-content-center">
-                        <h4 class="text-sm font-weight-normal mb-1">
-                          <span class="font-weight-bold">Profile</span>
-                        </h4>
+                    </a>
+                  </li>
+                  <hr>
+                  <li class="mb-2">
+                    <a class="dropdown-item border-radius-md" href="profile">
+                      <div class="d-flex py-1">
+                        <div class="d-flex flex-column justify-content-center">
+                          <h4 class="text-sm font-weight-normal mb-1">
+                            <span class="font-weight-bold">Profile</span>
+                          </h4>
+                        </div>
                       </div>
-                    </div>
-                  </a>
-                </li>
-                <li class="mb-2">
-                  <a class="dropdown-item border-radius-md" href="exit">
-                    <div class="d-flex py-1">
-                      <div class="d-flex flex-column justify-content-center">
-                        <h4 class="text-sm font-weight-normal mb-1">
-                          <span class="font-weight-bold">Log Out</span>
-                        </h4>
+                    </a>
+                  </li>
+                  <li class="mb-2">
+                    <a class="dropdown-item border-radius-md" href="exit">
+                      <div class="d-flex py-1">
+                        <div class="d-flex flex-column justify-content-center">
+                          <h4 class="text-sm font-weight-normal mb-1">
+                            <span class="font-weight-bold">Log Out</span>
+                          </h4>
+                        </div>
                       </div>
-                    </div>
-                  </a>
-                </li>
-              </ul>
-            </li>
-            <!-- <li class="nav-item dropdown pe-2 d-flex align-items-center">
+                    </a>
+                  </li>
+                </ul>
+              </li>
+              <!-- <li class="nav-item dropdown pe-2 d-flex align-items-center">
               <a href="javascript:;" class="nav-link text-body p-0" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
                 <i class="fa fa-bell cursor-pointer"></i>
               </a>
@@ -278,11 +217,11 @@ $userInfo = $InfoUser->userInfo($_SESSION['userData']['id_user']);
                 </li>
               </ul>
             </li> -->
-          </ul>
+            </ul>
+          </div>
         </div>
-      </div>
-    </nav>
-  <?php endif ?>
+      </nav>
+    <?php endif ?>
     <!-- End Navbar -->
     <div class="container-fluid py-4">
       <div class="row min-vh-80 h-100">

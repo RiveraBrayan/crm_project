@@ -49,10 +49,10 @@ class PagesModel
 				$counter++;
 			}
 
-			return $data;
+			return json_encode($data);
 		} else {
 			$data = array();
-			return $data;
+			return json_encode($data);
 		}
 
 
@@ -181,10 +181,10 @@ class PagesModel
 				}
 
 
-				return $data;
+				return json_encode($data);
 			} else {
 				$data = array();
-				return $data;
+				return json_encode($data);
 			}
 
 			$stmt->close();

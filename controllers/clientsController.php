@@ -3,6 +3,9 @@ require_once realpath(dirname(__FILE__) . '/../') . '/' . "models/clientsModel.p
 
 class ClientsController{
 
+    /**********************************************
+    * Clients Functions
+    **********************************************/
 	public function clients(){
               
               if ( isset($_SESSION['userData']) && $_SESSION['userData']['status'] == '202') {
@@ -19,7 +22,7 @@ class ClientsController{
             
             $data = ClientsModel::tableClients();
 
-            echo json_encode($data);
+            echo $data;
       }
 
       public function infoClient(){
@@ -53,6 +56,23 @@ class ClientsController{
             
             echo ClientsModel::saveClientsInfo($fields);
       }
+
+    /**********************************************
+    * Interactions Functions
+    **********************************************/
+      public function tableInteractions(){
+
+            
+            $id_client = $_GET['id_client'];
+
+            $fields = array(
+                  "id_client" => $id_client
+            );
+                  
+            $data = ClientsModel::tableInteractions($fields);
+
+            echo $data;
+      }
         
 	
 }
@@ -70,4 +90,9 @@ if (isset($_POST['action']) && $_POST['action'] === 'infoClient') {
 if (isset($_POST['action']) && $_POST['action'] === 'saveClientsInfo') {
       $saveClientsInfo = new ClientsController();
       $saveClientsInfo->saveClientsInfo();
+}
+    
+if (isset($_GET['action']) && $_GET['action'] === 'tableInteractions') {
+      $tableInteractions = new ClientsController();
+      $tableInteractions->tableInteractions();
 }

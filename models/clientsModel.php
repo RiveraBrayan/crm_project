@@ -24,7 +24,7 @@ class ClientsModel
 				$id_client = $row['id_client'];
 				$firstName_client = $row['firstName_client'];
 				$secondName_client = $row['secondName_client'];
-				$fullName = $firstName_client.' '.$secondName_client;
+				$fullName = $firstName_client . ' ' . $secondName_client;
 				$phone_client = $row['phone_client'];
 				$mail_client = $row['mail_client'];
 				$address_client = $row['address_client'];
@@ -34,6 +34,9 @@ class ClientsModel
 					<div >
 					<a type='button' href='clients&edition=$id_client' class='btn btn-icon btn-2 btn-info'>
 						<span class='btn-inner--icon'><i class='fas fa-edit'></i></span>
+					</a>
+					<a type='button' href='clients&interaction=$id_client' class='btn btn-icon btn-2 btn-success'>
+						<span class='btn-inner--icon'><i class='far fa-clipboard'></i></span>
 					</a>
 					<button class='btn btn-icon btn-2 btn-danger deleteRegister' type='button' data-id='$id_client' data-table='clients' data-suffix='client' data-page='clients'>
 						<span class='btn-inner--icon'><i class='fas fa-trash-alt'></i></span>
@@ -54,10 +57,10 @@ class ClientsModel
 				$counter++;
 			}
 
-			return $data;
+			return json_encode($data);
 		} else {
 			$data = array();
-			return $data;
+			return json_encode($data);
 		}
 
 
@@ -94,7 +97,7 @@ class ClientsModel
 		$stmt->close();
 		$db->close();
 	}
-	
+
 	static public function saveClientsInfo($fields)
 	{
 		$db = DBConexion::connection();
@@ -130,7 +133,7 @@ class ClientsModel
 
 			$stmt = $db->prepare($sql);
 
-			$stmt->bind_param("ssssss", $firstName_client, $secondName_client, $phone_client, $mail_client,$address_client,$organization_client);
+			$stmt->bind_param("ssssss", $firstName_client, $secondName_client, $phone_client, $mail_client, $address_client, $organization_client);
 
 			if ($stmt->execute()) {
 				$arrayDatos = array('status' => 202, 'message' => 'Client Created');
@@ -144,6 +147,69 @@ class ClientsModel
 		header("Content-Type: application/json; charset=UTF-8");
 		echo json_encode($arrayDatos, JSON_PRETTY_PRINT);
 
+
+		$db->close();
+	}
+
+	static public function tableInteractions($fields)
+	{
+
+		$id_client = $fields['id_client'];
+
+		$db = DBConexion::connection();
+
+		$sql = 'SELECT * FROM interactions WHERE id_client = ?';
+
+		$stmt = $db->prepare($sql);
+
+		$stmt->bind_param("i", $id_client);
+
+		if ($stmt) {
+
+			$stmt->execute();
+
+			$result = $stmt->get_result();
+
+			if ($result->num_rows > 0) {
+
+				$counter = 1;
+				while ($row = $result->fetch_assoc()) {
+					$id_client = $row['id_client'];
+					$type_interaction = $row['type_interaction'];
+					$date_interaction = $row['date_interaction'];
+					$description_interaction = $row['description_interaction'];
+
+					$actions = "
+									<a type='button' href='javascript:;' class='btn btn-icon btn-2 btn-info btnModalClients' data-toggle='modal' data-target='#editionInformationModal' data-id='$id_client' data-id='$id_client' data-date='$date_interaction' data-description='$description_interaction'>
+										<i style='color: white !important;' class='fas fa-edit text-secondary text-sm modalEditUser' ></i><span class='sr-only'>Edit Profile</span>
+									</a>
+									<button class='btn btn-icon btn-2 btn-danger deleteRegister' type='button' data-id='$id_client' data-table='interactions' data-suffix='interaction' data-page='clients&interaction=$id_client'>
+										<span class='btn-inner--icon'><i class='fas fa-trash-alt'></i></span>
+									</button>
+								";
+
+					$data[] = array(
+						"counter" => $counter,
+						"type_interaction" => $type_interaction,
+						"date_interaction" => $date_interaction,
+						"description_interaction" => $description_interaction,
+						"actions" => $actions
+					);
+
+					$counter++;
+				}
+
+
+				return json_encode($data);
+			} else {
+				$data = array();
+				return json_encode($data);
+			}
+
+			$stmt->close();
+		} else {
+			echo "Error en la preparación de la consulta.";
+		}
 
 		$db->close();
 	}

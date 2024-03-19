@@ -25,7 +25,7 @@
     <div class="col-md-5"></div>
     <div class="col-md-2">
         <div class="input-group input-group-outline my-3">
-            <a class="btn btn-icon btn-2 btn-success" type="button" style="color :white" href="roles?id=">
+            <a class="btn btn-icon btn-2 btn-success" type="button" style="color :white; margin-left: 45%;" href="roles?id=">
                 <span class="btn-inner--icon"><i class="fas fa-plus-square"></i> Create Rol</span>
             </a>
         </div>

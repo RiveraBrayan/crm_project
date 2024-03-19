@@ -13,6 +13,12 @@ $data['sign-up'] = array(
 	'controller' => 'LoginController',
 );
 
+$data['home'] = array(
+	'model' => 'HomeModel',
+	'view' => 'home',
+	'controller' => 'HomeController',
+);
+
 $data['profile'] = array(
 	'model' => 'ProfileModel',
 	'view' => 'profile',
@@ -39,7 +45,7 @@ $data['exit'] = array(
 
 
 
-if (isset($_SESSION['userData']['su_user'])) {
+if (isset($_SESSION['userData']['su_user']) && $_SESSION['userData']['su_user'] == 1) {
 	$data['users'] = array(
 		'model' => 'UsersModel',
 		'view' => 'users',
@@ -64,6 +70,9 @@ $allowAccess = "";
 
 if(isset($_SESSION['userData']['su_user'])){
 	if ($_SESSION['userData']['su_user'] != 1) {
+		if($page != ''){
+
+		}
 	
 		$namePage  = $page;
 		$idUser  = $_SESSION['userData']['id_user'];
@@ -73,7 +82,7 @@ if(isset($_SESSION['userData']['su_user'])){
 		$stmt->execute();
 		$stmt->close();
 	
-		// Obtener el resultado del procedimiento almacenado
+		// Obtener el resultado del procedimiento almacenado 
 		$result_permission = $db->query("SELECT @countMatches AS countMatches");
 		$data_permission = $result_permission->fetch_assoc();
 		$countMatches = $data_permission['countMatches'];

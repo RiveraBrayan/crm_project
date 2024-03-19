@@ -1,15 +1,6 @@
 <?php
-
-    if(isset($_GET['edition']) && $_GET['edition'] != ''){
-        $id_user = $_GET['edition'];
-        $tittle = "Edit User Info";
-
-    }else{
-        $id_user = '';
-        $tittle = "Create User Info";
-
-    }
-
+    $id_user = isset($_GET['edition']) && $_GET['edition'] != '' ? $_GET['edition'] : '';
+    $tittle = isset($_GET['edition']) && $_GET['edition'] != '' ? 'Edit User Info' : 'Create User Info';
 ?>
 
 <div class="row">

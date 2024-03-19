@@ -53,10 +53,10 @@
 					$counter++;
 				}
 				
-				return $data;
+				return json_encode($data);
 			} else {
 				$data = array();
-				return $data;
+				return json_encode($data);
 			}
 
 			

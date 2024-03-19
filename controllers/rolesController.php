@@ -24,7 +24,7 @@
                   
                   $data = RolesModel::rolesTable($fields);
 
-                  echo json_encode($data);
+                  echo $data;
             }
 
             public function infoRoles(){

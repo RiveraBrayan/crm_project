@@ -5,6 +5,8 @@
         <?php
             if(isset($_GET['edition'])){
                 include 'actions/edition.php';
+            }else if(isset($_GET['interaction'])){
+                include 'actions/interaction_tracking.php';
             }else{
                 include 'actions/list.php';
             }
