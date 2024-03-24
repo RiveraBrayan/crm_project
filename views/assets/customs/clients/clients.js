@@ -132,7 +132,49 @@ clients = function () {
       execDatatable(table, url, columns);
     },
 
+    saveInfoInteractions: function () {
 
+
+      let action = 'saveInteractionsInfo';
+      let id_client = $('#id_client').val();
+      let id_interaction = $('#id_interaction').val();
+      let txtTypeInteraction = $('#txtTypeInteraction').val();
+      let txtDate = $('#txtDate').val();
+      let txtDescription = $('#txtDescription ').val();
+
+      var data = new FormData();
+      data.append("action", action);
+      data.append("id_client", id_client);
+      data.append("id_interaction", id_interaction);
+      data.append("txtTypeInteraction", txtTypeInteraction);
+      data.append("txtDate", txtDate);
+      data.append("txtDescription", txtDescription);
+
+      console.log(data);
+
+      $.ajax({
+        url: 'controllers/clientsController.php',
+        method: 'POST',
+        processData: false,
+        contentType: false,
+        data: data,
+        dataType: 'json',
+        success: function (response) {
+          status = response.status;
+          message = response.message;
+
+          if (status == 202) {
+            id = response.id;
+            fncSweetAlert('success', message, `clients&interaction=${id}`);
+          } else {
+            fncSweetAlert('error', message, 'text');
+          }
+        },
+        error: function (error) {
+          console.error('Errors');
+        }
+      });
+    },
 
     /**********************************************
     * Extra Functions
@@ -178,9 +220,30 @@ if ($("#tableInteractions").length > 0) {
 }
 
 $("body").on("click", ".btnModalClients", function () {
-  $('#id_interaction').val($(this).data("id"));
-  console.log($(this).data("id"));
-  // comedores.borrarComedores($(this).data("id"));
+
+  if($(this).data("id")){
+    $('#id_interaction').val($(this).data("id"));
+    $('#txtTypeInteraction').val($(this).data("type_interaction"));
+    $('#txtDescription').val($(this).data("description"));
+    $('#txtDate').val($(this).data("date"));
+  }else{
+    $('#id_interaction').val('');
+    $('#txtTypeInteraction').val('');
+    $('#txtDescription').val('');
+    $('#txtDate').val('');
+  }
+
+
+  $('#form').parsley().on('form:submit', function () {
+    event.preventDefault();
+    clients.saveInfoInteractions();
+  });
 });
 
+
+if ($("#id_interaction").length > 0) {
+  if ($('#id_interaction').val() != '') {
+    console.log('entro');
+  }
+}
 

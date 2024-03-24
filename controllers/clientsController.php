@@ -73,6 +73,24 @@ class ClientsController{
 
             echo $data;
       }
+
+      public function saveInteractionsInfo(){
+            
+            $id_client = isset($_POST["id_client"]) ? $_POST["id_client"] : '';
+            $id_interaction = isset($_POST["id_interaction"]) ? $_POST["id_interaction"] : '';
+            $type_interaction = isset($_POST["txtTypeInteraction"]) ? $_POST["txtTypeInteraction"] : '';
+            $date_interaction = isset($_POST["txtDate"]) ? $_POST["txtDate"] : '';
+            $description_interaction = isset($_POST["txtDescription"]) ? $_POST["txtDescription"] : '';
+            $fields = array(
+                  "id_client" => $id_client,
+                  "id_interaction" => $id_interaction,
+                  "type_interaction" => $type_interaction,
+                  "date_interaction" => $date_interaction,
+                  "description_interaction" => $description_interaction,
+            );
+            
+            echo ClientsModel::saveInteractionsInfo($fields);
+      }
         
 	
 }
@@ -95,4 +113,9 @@ if (isset($_POST['action']) && $_POST['action'] === 'saveClientsInfo') {
 if (isset($_GET['action']) && $_GET['action'] === 'tableInteractions') {
       $tableInteractions = new ClientsController();
       $tableInteractions->tableInteractions();
+}
+
+if (isset($_POST['action']) && $_POST['action'] === 'saveInteractionsInfo') {
+      $saveInteractionsInfo = new ClientsController();
+      $saveInteractionsInfo->saveInteractionsInfo();
 }

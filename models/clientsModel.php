@@ -4,6 +4,9 @@ require_once realpath(dirname(__FILE__) . '/../') . '/' . "config/connection.php
 class ClientsModel
 {
 
+    /**********************************************
+    * Clients Functions
+    **********************************************/
 	static public function tableClients()
 	{
 
@@ -151,6 +154,10 @@ class ClientsModel
 		$db->close();
 	}
 
+    /**********************************************
+    * Interactions Functions
+    **********************************************/
+
 	static public function tableInteractions($fields)
 	{
 
@@ -175,15 +182,16 @@ class ClientsModel
 				$counter = 1;
 				while ($row = $result->fetch_assoc()) {
 					$id_client = $row['id_client'];
+					$id_interaction = $row['id_interaction'];
 					$type_interaction = $row['type_interaction'];
 					$date_interaction = $row['date_interaction'];
 					$description_interaction = $row['description_interaction'];
 
 					$actions = "
-									<a type='button' href='javascript:;' class='btn btn-icon btn-2 btn-info btnModalClients' data-toggle='modal' data-target='#editionInformationModal' data-id='$id_client' data-id='$id_client' data-date='$date_interaction' data-description='$description_interaction'>
+									<a type='button' href='javascript:;' class='btn btn-icon btn-2 btn-info btnModalClients' id='btnModalClients' data-toggle='modal' data-target='#editionInformationModal' data-id='$id_interaction' data-type_interaction='$type_interaction' data-date='$date_interaction' data-description='$description_interaction'>
 										<i style='color: white !important;' class='fas fa-edit text-secondary text-sm modalEditUser' ></i><span class='sr-only'>Edit Profile</span>
 									</a>
-									<button class='btn btn-icon btn-2 btn-danger deleteRegister' type='button' data-id='$id_client' data-table='interactions' data-suffix='interaction' data-page='clients&interaction=$id_client'>
+									<button class='btn btn-icon btn-2 btn-danger deleteRegister' type='button' data-id='$id_interaction' data-table='interactions' data-suffix='interaction' data-page='clients&interaction=$id_client'>
 										<span class='btn-inner--icon'><i class='fas fa-trash-alt'></i></span>
 									</button>
 								";
@@ -213,4 +221,56 @@ class ClientsModel
 
 		$db->close();
 	}
+	static public function saveInteractionsInfo($fields)
+	{
+		$db = DBConexion::connection();
+
+		$id_client = $fields['id_client'];
+		$id_interaction = $fields['id_interaction'];
+		$type_interaction = $fields['type_interaction'];
+		$date_interaction = $fields['date_interaction'];
+		$description_interaction = $fields['description_interaction'];
+
+		if (isset($id_client) && $id_client != '') {
+
+			$sql = "UPDATE interactions SET id_client = ?, type_interaction = ?, date_interaction = ?, description_interaction = ? WHERE id_interaction = ?";
+
+			$stmt = $db->prepare($sql);
+
+			$stmt->bind_param("sssss", $id_client, $type_interaction, $date_interaction, $description_interaction, $id_interaction);
+
+			if ($stmt->execute()) {
+				$arrayDatos = array('status' => 202, 'message' => 'Interaction Updated', 'id' => $id_client);
+			} else {
+				$arrayDatos = array('status' => 404, 'message' => 'Error');
+			}
+
+			$stmt->close();
+		} else {
+
+			$sql = "INSERT INTO interactions (id_client,type_interaction,date_interaction,description_interaction) 
+				VALUES (?,?,?,?)";
+
+			$stmt = $db->prepare($sql);
+
+			$stmt->bind_param("ssss", $id_client, $type_interaction, $date_interaction, $description_interaction);
+
+			if ($stmt->execute()) {
+				// $lastInsertedId = $db->insert_id;
+				$arrayDatos = array('status' => 202, 'message' => 'Interaction Created', 'id' => $id_client);
+			} else {
+				$arrayDatos = array('status' => 404, 'message' => 'Error');
+			}
+
+			$stmt->close();
+		}
+
+		header("Content-Type: application/json; charset=UTF-8");
+		echo json_encode($arrayDatos, JSON_PRETTY_PRINT);
+
+
+		$db->close();
+	}
+
+
 }

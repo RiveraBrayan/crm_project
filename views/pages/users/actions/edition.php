@@ -33,14 +33,14 @@
             <div class="col-md-6">
                 <div class="input-group input-group-static mb-4"> 
                     <label>Email</label>
-                    <input type="text" class="form-control" id="txtEmail" value="" data-parsley-required="true">
+                    <input type="email" class="form-control" id="txtEmail" value="" data-parsley-type="email" data-parsley-required="true">
                 </div>
             </div>
 
             <div class="col-md-6">
                 <div class="input-group input-group-static mb-4">
                     <label>Phone</label>
-                    <input type="text" class="form-control" id="txtPhone" value="" data-parsley-required="true">
+                    <input type="text" class="form-control" id="txtPhone" value="" data-parsley-pattern="^\d{10}$" data-parsley-pattern-message="Please enter a valid 10-digit phone number" data-parsley-required="true">
                 </div>
             </div>
 

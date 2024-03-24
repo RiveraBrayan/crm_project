@@ -27,7 +27,7 @@
         </div>
 
             <div class="col-md-6">
-                <div class="input-group input-group-static mb-4">
+                <div class="input-group input-group-static mb-4"> 
                     <label>Second Name</label>
                     <input type="text" class="form-control required" id="secondName_client" data-parsley-required="true">
                 </div>
@@ -36,14 +36,14 @@
             <div class="col-md-6">
                 <div class="input-group input-group-static mb-4">
                     <label>Phone</label>
-                    <input type="text" class="form-control required" id="phone_client" pattern="^[0-9]+$" data-parsley-required="true">
+                    <input type="text" class="form-control required" id="phone_client" data-parsley-pattern="^\d{10}$" data-parsley-pattern-message="Please enter a valid 10-digit phone number"  data-parsley-required="true">
                 </div>
             </div>
 
             <div class="col-md-6">
                 <div class="input-group input-group-static mb-4">
                     <label>Mail</label>
-                    <input type="mail" class="form-control required" id="mail_client" data-parsley-required="true">
+                    <input type="mail" class="form-control required" id="mail_client" data-parsley-type="email" data-parsley-required="true">
                 </div>
             </div>
 

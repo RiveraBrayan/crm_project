@@ -13,8 +13,8 @@ $id_client = $_GET['interaction'];
     <div class="col-md-2">
         <input type="hidden" id="id_client" value="<?php echo $id_client ?>">
         <div class="input-group input-group-outline my-3">
-            <a class="btn btn-icon btn-2 btn-success" type="button" style="color :white; margin-left: 30%;" href="clients?edition=">
-                <span class="btn-inner--icon"><i class="fas fa-plus-square"></i> Add Interaction</span>
+            <a class="btn btn-icon btn-2 btn-success btnModalClients" id="btnModalClients" type="button" style="color :white; margin-left: 30%;" href='javascript:;' data-toggle='modal' data-target='#editionInformationModal'>
+                <span class="btn-inner--icon"><i class="fas fa-plus-square modalEditUser"></i> Add Interaction</span>
             </a>
         </div>
     </div>
@@ -31,6 +31,10 @@ $id_client = $_GET['interaction'];
         </tr>
     </thead>
 </table>
+
+<div class="d-flex justify-content-end" style="margin-top: 50px;">
+    <a type="button" href="clients" class="btn btn-danger ml-2" style="color: white;">Cancel</a>
+</div>
 
 <!-- Modal Interaction Information-->
 <div class="modal fade" id="editionInformationModal" tabindex="-1" role="dialog" aria-labelledby="editionInformationModalLabel" aria-hidden="true">
@@ -57,10 +61,10 @@ $id_client = $_GET['interaction'];
                         </div>
                         <div class="input-group input-group-static my-3">
                             <label>Date</label>
-                            <input type="date" class="form-control" onfocus="focused(this)" onfocusout="defocused(this)" data-parsley-required="true">
+                            <input type="date" id="txtDate" class="form-control" data-parsley-required="true">
                         </div>
                         <div class="input-group input-group-dynamic">
-                            <textarea class="form-control" rows="5" placeholder="Say a few words about who you are or what you're working on." spellcheck="false" data-parsley-required="true"></textarea>
+                            <textarea class="form-control" rows="5" id="txtDescription" placeholder="Say a few words about who you are or what you're working on." spellcheck="false" data-parsley-required="true"></textarea>
                         </div>
                     </div>
                 </div>
