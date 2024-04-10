@@ -11,7 +11,7 @@
     }
 
 ?>
-
+<!-- Prueba de edicion -->
 <div class="row">
     <h4><?php echo $tittle ?> </h4>
     <form method="post" id="form" class="needs-validation" novalidate autocomplete="off" enctype="multipart/form-data">
@@ -22,7 +22,6 @@
             <div class="input-group input-group-static mb-4">
                 <label>First Name</label>
                 <input type="text" class="form-control required" id="firstName_client" data-parsley-required="true">
-                <div class="invalid-feedback">Campo vacío, rellenar</div>
             </div>
         </div>
 
@@ -34,7 +33,7 @@
             </div>
 
             <div class="col-md-6">
-                <div class="input-group input-group-static mb-4">
+                <div class="input-group input-group-static mb-4"> 
                     <label>Phone</label>
                     <input type="text" class="form-control required" id="phone_client" data-parsley-pattern="^\d{10}$" data-parsley-pattern-message="Please enter a valid 10-digit phone number"  data-parsley-required="true">
                 </div>

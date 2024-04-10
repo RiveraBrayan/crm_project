@@ -231,7 +231,7 @@ class ClientsModel
 		$date_interaction = $fields['date_interaction'];
 		$description_interaction = $fields['description_interaction'];
 
-		if (isset($id_client) && $id_client != '') {
+		if (isset($id_interaction) && $id_interaction != '') {
 
 			$sql = "UPDATE interactions SET id_client = ?, type_interaction = ?, date_interaction = ?, description_interaction = ? WHERE id_interaction = ?";
 

@@ -220,7 +220,6 @@ if ($("#tableInteractions").length > 0) {
 }
 
 $("body").on("click", ".btnModalClients", function () {
-
   if($(this).data("id")){
     $('#id_interaction').val($(this).data("id"));
     $('#txtTypeInteraction').val($(this).data("type_interaction"));
